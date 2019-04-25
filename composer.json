@@ -1,0 +1,30 @@
+{
+    "name": "arekx/array-expression",
+    "description": "Array Expression Parser Interface",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Aleksandar Panic",
+            "email": "arekusanda1@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ArekX\\ArrayExpression\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6",
+        "phpunit/php-code-coverage": "^5"
+    },
+    "scripts": {
+        "test": "php vendor/bin/phpunit",
+        "coverage": "php vendor/bin/phpunit --coverage-html coverage --whitelist src"
+    }
+}
