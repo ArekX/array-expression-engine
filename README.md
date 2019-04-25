@@ -1,4 +1,4 @@
-# Array Expression Parser
+# Array Expression Engine
 
 This is an array expression parser which can be used to parse values using
 configuration specified in PHP arrays. These arrays can be loaded from anywhere,

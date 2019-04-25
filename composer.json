@@ -1,6 +1,6 @@
 {
-    "name": "arekx/array-expression",
-    "description": "Array Expression Parser Interface",
+    "name": "arekx/array-expression-engine",
+    "description": "Array Expression Engine Parser",
     "license": "Apache-2.0",
     "authors": [
         {
