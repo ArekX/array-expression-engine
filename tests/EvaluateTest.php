@@ -15,14 +15,14 @@ class EvaluateTest extends TestCase
     public function testCreateInitialInstance()
     {
         $i = $this->createInstance();
-        $this->assertEquals(null, $i->getExpressionParser());
+        $this->assertEquals(null, $i->getCurrentExpressionParser());
     }
 
     public function testParserGetsPassedInConstructor()
     {
         $parser = new ExpressionParser();
         $i = $this->createInstance($parser);
-        $this->assertEquals($parser, $i->getExpressionParser());
+        $this->assertEquals($parser, $i->getCurrentExpressionParser());
     }
 
     public function testEvaluatorRun()

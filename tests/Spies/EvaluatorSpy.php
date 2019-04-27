@@ -11,7 +11,7 @@ use ArekX\ArrayExpression\Evaluator;
 
 class EvaluatorSpy extends Evaluator
 {
-    public function getExpressionParser()
+    public function getCurrentExpressionParser()
     {
         return $this->expressionParser;
     }

@@ -66,13 +66,9 @@ class Evaluator
      */
     public function run(array $expression, $value)
     {
-        $valueParser = $this->determineValueParser($value);
-
-        if ($this->expressionParser === null) {
-            $this->expressionParser = new DefaultExpressionParser();
-        }
-
-        return $this->expressionParser->parse($expression)->evaluate($valueParser);
+        return $this->getExpressionParser()
+            ->parse($expression)
+            ->evaluate($this->determineValueParser($value));
     }
 
     /**
@@ -93,7 +89,9 @@ class Evaluator
 
             $valueParser->setRaw($value);
             return $valueParser;
-        } elseif (is_object($value)) {
+        }
+
+        if (is_object($value)) {
             if (!($this->valueParser instanceof ObjectValueParser)) {
                 $valueParser = $this->valueParser = new ObjectValueParser();
             }
@@ -108,5 +106,19 @@ class Evaluator
         }
 
         return $valueParser;
+    }
+
+    /**
+     * Returns expression parser.
+     *
+     * @return ExpressionParser
+     */
+    public function getExpressionParser()
+    {
+        if ($this->expressionParser === null) {
+            $this->expressionParser = new DefaultExpressionParser();
+        }
+
+        return $this->expressionParser;
     }
 }

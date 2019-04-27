@@ -7,6 +7,10 @@ like from JSON string, PHP files, etc.
 These expressions are used to configure the expression parser engine which
 runs a value through the rules defined in the array expression to return a result.
 
+## Installation
+
+
+
 ## Usage
 
 ```php
@@ -38,13 +42,20 @@ foreach ($values as $value) {
 
 ### Operators
 
+#### Summary
+
+Following operators are available:
+
 Operator | Name | Definition | Example
 -------- | ---- | ---------- | -------
 AND | AND operator  | `['and', <expression1>, ..., <expressionN>]` | `['and', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]]`  
 OR | OR operator  | `['or', <expression1>, ..., <expressionN>]` | `['or', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]]`
 XOR | XOR operator (exclusive OR)  | `['xor', <expression1>, ..., <expressionN>]` | `['xor', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]]`
+NOT | NOT operator (inverts check)  | `['not', <expression>]` | `['not', ['compare', 'name', 'test']]`
 COMPARE | Comparison operator | `['compare', 'value']`,<br> `['compare', 'name', 'value']`,<br> `['compare, 'name', '=', 'value']`,<br>`['compare, 'name', '>=', 0, 'default' => 0]` | `['compare', 'age', '>', 2]`
 REGEX | Regex operator | `['regex', '/pattern/']`, `['regex', 'name', '/pattern/']` | `['regex', 'name', '/snow/']`
+
+Custom operators can be created and added to the evaluator as needed.
 
 
 ## Tests
