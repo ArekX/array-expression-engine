@@ -36,4 +36,12 @@ abstract class BaseValueParser implements ValueParser
     {
         return $this->raw;
     }
+
+
+    public static function from($rawValue)
+    {
+        $valueParser = new static();
+        $valueParser->setRaw($rawValue);
+        return $valueParser;
+    }
 }

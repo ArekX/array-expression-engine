@@ -8,17 +8,10 @@
 namespace ArekX\ArrayExpression\Operators;
 
 
-use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Interfaces\ExpressionParser;
-use ArekX\ArrayExpression\Interfaces\ValueParser;
+use ArekX\ArrayExpression\Interfaces\Operator;
 
-/**
- * Class GroupOperator
- * Operator for grouping actions.
- *
- * @package ArekX\ArrayExpression\Operators
- */
-class GroupOperator implements Operator
+abstract class BaseGroupOperator implements Operator
 {
     /**
      * Expression configuration
@@ -35,6 +28,13 @@ class GroupOperator implements Operator
     protected $parser = null;
 
     /**
+     * List of instanced operators
+     *
+     * @var Operator[]
+     */
+    protected $operators = [];
+
+    /**
      * Passes data from operator configuration.
      *
      * Depending on the operator this data can contain other sub-expressions which need to be parsed using
@@ -45,6 +45,9 @@ class GroupOperator implements Operator
      */
     public function setConfig(array $config)
     {
+        if (count($config) <= 1) {
+            throw new \InvalidArgumentException('Config must have at least one sub operator.');
+        }
         $this->config = $config;
     }
 
@@ -56,16 +59,5 @@ class GroupOperator implements Operator
     public function setParser(ExpressionParser $parser)
     {
         $this->parser = $parser;
-    }
-
-    /**
-     * Evaluates one value.
-     *
-     * @param ValueParser $value Value to be evaluated
-     * @return mixed Evaluation result
-     */
-    public function evaluate(ValueParser $value)
-    {
-        // TODO: Implement evaluate() method.
     }
 }

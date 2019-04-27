@@ -7,9 +7,9 @@
 
 namespace tests\Spies;
 
-use ArekX\ArrayExpression\Operators\GroupOperator;
+use ArekX\ArrayExpression\Operators\XOrOperator;
 
-class GroupOperatorSpy extends GroupOperator
+class XOrOperatorSpy extends XOrOperator
 {
     public function getConfig()
     {
@@ -19,5 +19,10 @@ class GroupOperatorSpy extends GroupOperator
     public function getParser()
     {
         return $this->parser;
+    }
+
+    public function getOperators()
+    {
+        return $this->operators;
     }
 }

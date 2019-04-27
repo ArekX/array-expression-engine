@@ -24,15 +24,14 @@ class Evaluator
 
     protected $valueHandler = null;
 
-    protected function __construct($expressionParser = null, $valueHandler = null)
+    protected function __construct($expressionParser = null)
     {
         $this->expressionParser = $expressionParser;
-        $this->valueHandler = $valueHandler;
     }
 
-    public static function from($expressionParser = null, $valueHandler = null)
+    public static function from($expressionParser = null)
     {
-        return new static($expressionParser, $valueHandler);
+        return new static($expressionParser);
     }
 
     public function run(array $expression, $value)

@@ -13,4 +13,4 @@ Run `composer test` to run tests.
 
 ## Test Coverage
 
-Optimal test coverage is 100%, to check the test coverage run `composer coverage`
+Ideally, goal test coverage is 100%, to check the test coverage run `composer coverage`
