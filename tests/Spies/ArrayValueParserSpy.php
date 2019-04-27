@@ -5,11 +5,12 @@
  * @since 1.0.0
  **/
 
-namespace tests\mocks;
+namespace tests\Spies;
 
-use ArekX\ArrayExpression\ValueParsers\ObjectValueParser;
 
-class ObjectValueParserSpy extends ObjectValueParser
+use ArekX\ArrayExpression\ValueParsers\ArrayValueParser;
+
+class ArrayValueParserSpy extends ArrayValueParser
 {
     public function getValueCache()
     {

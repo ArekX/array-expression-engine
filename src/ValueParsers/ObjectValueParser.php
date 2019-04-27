@@ -11,9 +11,10 @@ use ArekX\ArrayExpression\Exceptions\InvalidValueTypeException;
 
 /**
  * Class ObjectValueParser
+ * Object value parser which parses objects via keys.
+ *
  * @package ArekX\ArrayExpression\ValueParsers
  *
- * Object value parser which parses objects via keys.
  */
 class ObjectValueParser extends BaseValueParser
 {
@@ -39,7 +40,7 @@ class ObjectValueParser extends BaseValueParser
      * Returns parsed value by specified by $requested name.
      *
      * If a $requestedName is an empty string whole raw value is returned.
-     * If a $requestedName is a string in dot notation then array will be traversed to find value from those keys.
+     * If a $requestedName is a string in dot notation then object will be traversed to find value from those keys.
      *
      * @param string $requestedName Requested key to be returned
      * @param null $default Default value to be returned if nothing is found.

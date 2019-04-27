@@ -9,9 +9,10 @@ namespace ArekX\ArrayExpression\Interfaces;
 
 /**
  * Interface OperatorParser
+ * Interface which can be passed to evaluator for parsing operators.
+ *
  * @package ArekX\ArrayExpression\Interfaces
  *
- * Interface which can be passed to evaluator for parsing operators.
  */
 interface OperatorParser
 {

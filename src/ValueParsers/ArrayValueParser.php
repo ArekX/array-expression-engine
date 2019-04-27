@@ -11,9 +11,10 @@ use ArekX\ArrayExpression\Exceptions\InvalidValueTypeException;
 
 /**
  * Class ArrayValueParser
+ * Array value parser which parses arrays by specified keys.
+ *
  * @package ArekX\ArrayExpression\ValueParsers
  *
- * Array value parser which parses arrays by specified keys.
  */
 class ArrayValueParser extends BaseValueParser
 {
@@ -34,6 +35,7 @@ class ArrayValueParser extends BaseValueParser
         $this->valueCache = [];
         parent::setRaw($rawValue);
     }
+
 
     /**
      * Returns parsed value by specified by $requested name.

@@ -10,8 +10,8 @@ namespace tests\ValueParsers;
 
 use ArekX\ArrayExpression\Exceptions\InvalidValueTypeException;
 use ArekX\ArrayExpression\ValueParsers\ArrayValueParser;
-use tests\mocks\ArrayValueParserSpy;
-use tests\mocks\ObjectValueParserSpy;
+use tests\Spies\ArrayValueParserSpy;
+use tests\Spies\ObjectValueParserSpy;
 use tests\TestCase;
 
 class ObjectValueParserTest extends TestCase

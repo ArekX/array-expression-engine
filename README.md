@@ -6,3 +6,11 @@ like from JSON string, PHP files, etc.
 
 These expressions are used to configure the expression parser engine which
 runs a value through the rules defined in the array expression to return a result.
+
+## Tests
+
+Run `composer test` to run tests.
+
+## Test Coverage
+
+Optimal test coverage is 100%, to check the test coverage run `composer coverage`

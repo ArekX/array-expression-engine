@@ -5,21 +5,21 @@
  * @since 1.0.0
  **/
 
-namespace ArekX\ArrayExpression\Operators;
+namespace tests\Mocks;
 
 
 use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Interfaces\OperatorParser;
 use ArekX\ArrayExpression\Interfaces\ValueParser;
 
-/**
- * Class GroupOperator
- * Operator for grouping actions.
- *
- * @package ArekX\ArrayExpression\Operators
- */
-class GroupOperator implements Operator
+class MockOperator implements Operator
 {
+    public $data;
+    public $parser;
+    public $valueParser;
+    public $result = true;
+
+
     /**
      * Passes data from operator configuration..
      *
@@ -31,7 +31,7 @@ class GroupOperator implements Operator
      */
     public function setData(array $data)
     {
-        // TODO: Implement setData() method.
+        $this->data = $data;
     }
 
     /**
@@ -41,7 +41,7 @@ class GroupOperator implements Operator
      */
     public function setParser(OperatorParser $parser)
     {
-        // TODO: Implement setParser() method.
+        $this->parser = $parser;
     }
 
     /**
@@ -52,6 +52,7 @@ class GroupOperator implements Operator
      */
     public function evaluate(ValueParser $value)
     {
-        // TODO: Implement evaluate() method.
+        $this->valueParser = $value;
+        return $this->result;
     }
 }

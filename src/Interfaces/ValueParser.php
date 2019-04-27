@@ -9,9 +9,9 @@ namespace ArekX\ArrayExpression\Interfaces;
 
 /**
  * Interface ValueParser
- * @package ArekX\ArrayExpression\Interfaces
- *
  * Interface which can be sent to evaluator to parse values.
+ *
+ * @package ArekX\ArrayExpression\Interfaces
  */
 interface ValueParser
 {

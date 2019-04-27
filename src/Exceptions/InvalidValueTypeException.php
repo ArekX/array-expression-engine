@@ -9,9 +9,11 @@ namespace ArekX\ArrayExpression\Exceptions;
 
 class InvalidValueTypeException extends \Exception
 {
+    public $value;
+
     public function __construct($value)
     {
-        $value = print_r($value, true);
-        parent::__construct("Invalid value type: " . $value, 0, null);
+        $this->value = $value;
+        parent::__construct("Invalid value type: " . print_r($value, true), 0, null);
     }
 }

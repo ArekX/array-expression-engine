@@ -12,9 +12,10 @@ use ArekX\ArrayExpression\Interfaces\ValueParser;
 
 /**
  * Class BaseValueParser
+ * Base value parser which is used to handle common functionality.
+ *
  * @package ArekX\ArrayExpression\ValueParsers
  *
- * Base value parser which is used to handle common functionality.
  */
 abstract class BaseValueParser implements ValueParser
 {

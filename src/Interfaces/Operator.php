@@ -7,11 +7,12 @@
 
 namespace ArekX\ArrayExpression\Interfaces;
 
+
 /**
  * Interface Operator
- * @package ArekX\ArrayExpression\Interfaces
- *
  * Instance of one operator which can have subexpressions.
+ *
+ * @package ArekX\ArrayExpression\Interfaces
  */
 interface Operator
 {
@@ -36,8 +37,8 @@ interface Operator
     /**
      * Evaluates one value.
      *
-     * @param mixed $value Value to be evaluated
+     * @param ValueParser $value Value to be evaluated
      * @return mixed Evaluation result
      */
-    public function evaluate($value);
+    public function evaluate(ValueParser $value);
 }

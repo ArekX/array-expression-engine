@@ -9,9 +9,10 @@ namespace ArekX\ArrayExpression\ValueParsers;
 
 /**
  * Class SingleValueParser
+ * Single value parser which gets and only returns one raw value.
+ *
  * @package ArekX\ArrayExpression\ValueParsers
  *
- * Single value parser which gets and only returns one raw value.
  */
 class SingleValueParser extends BaseValueParser
 {

@@ -10,7 +10,7 @@ namespace tests\ValueParsers;
 
 use ArekX\ArrayExpression\Exceptions\InvalidValueTypeException;
 use ArekX\ArrayExpression\ValueParsers\ArrayValueParser;
-use tests\mocks\ArrayValueParserSpy;
+use tests\Spies\ArrayValueParserSpy;
 use tests\TestCase;
 
 class ArrayValueParserTest extends TestCase

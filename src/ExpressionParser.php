@@ -7,22 +7,58 @@
 
 namespace ArekX\ArrayExpression;
 
-
-use ArekX\ArrayExpression\Interfaces\OperatorParser;
+use ArekX\ArrayExpression\Exceptions\TypeNotMappedException;
+use \ArekX\ArrayExpression\Interfaces\ExpressionParser as ExpressionParserInterface;
 
 /**
  * Class ExpressionParser
- * @package ArekX\ArrayExpression
- *
  * Expression parser which converts array expressions into Operator instances.
+ *
+ * @package ArekX\ArrayExpression
  */
-class ExpressionParser implements OperatorParser
+class ExpressionParser implements ExpressionParserInterface
 {
+    /**
+     * Type map used to resolve types in arrays.
+     * @var array
+     */
+    protected $typeMap = [];
+
     /**
      * @inheritDoc
      */
+    public function setTypeMap(array $typeMap)
+    {
+        $this->typeMap = $typeMap;
+    }
+
+    /**
+     * Sets a type resolver.
+     *
+     * @param string $type Type name
+     * @param callable|string $resolver Callable resolver or a class which gets created.
+     */
+    public function setType(string $type, $resolver)
+    {
+        $this->typeMap[$type] = $resolver;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws TypeNotMappedException
+     */
     public function parse(array $expression)
     {
-        // TODO: Implement parse() method.
+        if (empty($this->typeMap[$expression[0]])) {
+            throw new TypeNotMappedException($expression[0]);
+        }
+
+        $resolver = $this->typeMap[$expression[0]];
+
+        if (is_callable($resolver)) {
+            return $resolver(...$expression);
+        }
+
+        return new $resolver();
     }
 }
