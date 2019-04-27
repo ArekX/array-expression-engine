@@ -9,7 +9,7 @@ namespace ArekX\ArrayExpression\Operators;
 
 
 use ArekX\ArrayExpression\Interfaces\Operator;
-use ArekX\ArrayExpression\Interfaces\OperatorParser;
+use ArekX\ArrayExpression\Interfaces\ExpressionParser;
 use ArekX\ArrayExpression\Interfaces\ValueParser;
 
 /**
@@ -21,27 +21,41 @@ use ArekX\ArrayExpression\Interfaces\ValueParser;
 class GroupOperator implements Operator
 {
     /**
-     * Passes data from operator configuration..
+     * Expression configuration
+     *
+     * @var array
+     */
+    protected $config = [];
+
+    /**
+     * Parser used for expression parsing.
+     *
+     * @var null|ExpressionParser
+     */
+    protected $parser = null;
+
+    /**
+     * Passes data from operator configuration.
      *
      * Depending on the operator this data can contain other sub-expressions which need to be parsed using
-     * OperatorParser
+     * ExpressionParser
      *
-     * @param array $data Expressions to be processed
-     * @see OperatorParser
+     * @param array $config Expressions to be processed
+     * @see ExpressionParser
      */
-    public function setData(array $data)
+    public function setConfig(array $config)
     {
-        // TODO: Implement setData() method.
+        $this->config = $config;
     }
 
     /**
      * Sets operator parser which will be used to parse arrays and return more operator instances.
      *
-     * @param OperatorParser $parser Parser which will be set.
+     * @param ExpressionParser $parser Parser which will be set.
      */
-    public function setParser(OperatorParser $parser)
+    public function setParser(ExpressionParser $parser)
     {
-        // TODO: Implement setParser() method.
+        $this->parser = $parser;
     }
 
     /**

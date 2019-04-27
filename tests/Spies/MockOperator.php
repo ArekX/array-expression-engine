@@ -17,7 +17,7 @@ class MockOperator implements Operator
     /**
      * @inheritDoc
      */
-    public function setData(array $data)
+    public function setConfig(array $config)
     {
         // TODO: Implement setData() method.
     }

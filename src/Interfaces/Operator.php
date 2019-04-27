@@ -17,22 +17,22 @@ namespace ArekX\ArrayExpression\Interfaces;
 interface Operator
 {
     /**
-     * Passes data from operator configuration..
+     * Passes data from operator configuration.
      *
      * Depending on the operator this data can contain other sub-expressions which need to be parsed using
-     * OperatorParser
+     * ExpressionParser
      *
-     * @param array $data Expressions to be processed
-     * @see OperatorParser
+     * @param array $config Expressions to be processed
+     * @see ExpressionParser
      */
-    public function setData(array $data);
+    public function setConfig(array $config);
 
     /**
      * Sets operator parser which will be used to parse arrays and return more operator instances.
      *
-     * @param OperatorParser $parser Parser which will be set.
+     * @param ExpressionParser $parser Parser which will be set.
      */
-    public function setParser(OperatorParser $parser);
+    public function setParser(ExpressionParser $parser);
 
     /**
      * Evaluates one value.
