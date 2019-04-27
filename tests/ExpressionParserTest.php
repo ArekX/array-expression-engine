@@ -77,6 +77,15 @@ class ExpressionParserTest extends TestCase
         $this->assertInstanceOf(MockOperator::class, $operator);
     }
 
+    public function testArrayIsPreconfigured()
+    {
+        $parser = new ExpressionParser();
+        $parser->setType('mock', MockOperator::class);
+
+        $operator = $parser->parse(['mock', 'a param']);
+        $this->assertInstanceOf(MockOperator::class, $operator);
+    }
+
 
     public function testUnknownTypeThrowsAnError()
     {

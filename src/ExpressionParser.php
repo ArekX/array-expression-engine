@@ -9,6 +9,7 @@ namespace ArekX\ArrayExpression;
 
 use ArekX\ArrayExpression\Exceptions\TypeNotMappedException;
 use \ArekX\ArrayExpression\Interfaces\ExpressionParser as ExpressionParserInterface;
+use ArekX\ArrayExpression\Interfaces\Operator;
 
 /**
  * Class ExpressionParser
@@ -59,6 +60,10 @@ class ExpressionParser implements ExpressionParserInterface
             return $resolver(...$expression);
         }
 
-        return new $resolver();
+        /** @var Operator $resolver */
+        $resolver = new $resolver();
+        $resolver->configure($expression);
+        $resolver->setParser($this);
+        return $resolver;
     }
 }

@@ -25,7 +25,7 @@ interface Operator
      * @param array $config Expressions to be processed
      * @see ExpressionParser
      */
-    public function setConfig(array $config);
+    public function configure(array $config);
 
     /**
      * Sets operator parser which will be used to parse arrays and return more operator instances.

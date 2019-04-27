@@ -7,12 +7,12 @@
 
 namespace tests\Spies;
 
-use ArekX\ArrayExpression\Evaluator;
+use ArekX\ArrayExpression\Operators\RegexOperator;
 
-class EvaluatorSpy extends Evaluator
+class RegexOperatorSpy extends RegexOperator
 {
-    public function getExpressionParser()
+    public function getParser()
     {
-        return $this->expressionParser;
+        return $this->parser;
     }
 }

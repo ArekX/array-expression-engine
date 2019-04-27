@@ -7,11 +7,9 @@
 
 namespace ArekX\ArrayExpression\Operators;
 
-
-use ArekX\ArrayExpression\Interfaces\ExpressionParser;
 use ArekX\ArrayExpression\Interfaces\Operator;
 
-abstract class BaseGroupOperator implements Operator
+abstract class BaseGroupOperator extends BaseOperator
 {
     /**
      * Expression configuration
@@ -21,43 +19,19 @@ abstract class BaseGroupOperator implements Operator
     protected $config = [];
 
     /**
-     * Parser used for expression parsing.
-     *
-     * @var null|ExpressionParser
-     */
-    protected $parser = null;
-
-    /**
      * List of instanced operators
      *
      * @var Operator[]
      */
     protected $operators = [];
-
     /**
-     * Passes data from operator configuration.
-     *
-     * Depending on the operator this data can contain other sub-expressions which need to be parsed using
-     * ExpressionParser
-     *
-     * @param array $config Expressions to be processed
-     * @see ExpressionParser
+     * @inheritDoc
      */
-    public function setConfig(array $config)
+    public function configure(array $config)
     {
         if (count($config) <= 1) {
             throw new \InvalidArgumentException('Config must have at least one sub operator.');
         }
         $this->config = $config;
-    }
-
-    /**
-     * Sets operator parser which will be used to parse arrays and return more operator instances.
-     *
-     * @param ExpressionParser $parser Parser which will be set.
-     */
-    public function setParser(ExpressionParser $parser)
-    {
-        $this->parser = $parser;
     }
 }

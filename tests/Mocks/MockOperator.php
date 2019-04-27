@@ -15,6 +15,7 @@ use ArekX\ArrayExpression\Interfaces\ValueParser;
 class MockOperator implements Operator
 {
     public $config;
+    public $preConfig;
     public $parser;
     public $valueParser;
     public $result = true;
@@ -29,7 +30,7 @@ class MockOperator implements Operator
      * @param array $config Expressions to be processed
      * @see ExpressionParser
      */
-    public function setConfig(array $config)
+    public function configure(array $config)
     {
         $this->config = $config;
     }
@@ -54,5 +55,19 @@ class MockOperator implements Operator
     {
         $this->valueParser = $value;
         return $this->result;
+    }
+
+    /**
+     * Passes data from expression parser configuration.
+     *
+     * Depending on the operator this data can contain other sub-expressions which need to be parsed using
+     * ExpressionParser
+     *
+     * @param array $config Expressions to be processed
+     * @see ExpressionParser
+     */
+    public function preconfigure(array $config)
+    {
+        $this->preConfig = $config;
     }
 }
