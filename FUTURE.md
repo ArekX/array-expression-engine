@@ -1,7 +1,8 @@
 # Future Roadmap
 
-* Add `Data`, unified key value database where operators can read general data from. As an operator.
+* Add `Data`, unified key value database where operators can read general data from. As an operator. `['data', 'key1.subkey']`
 * Allow passing instances of operator into expressions.
+* Add info aboout object/array traversal
 * Exists operator `['exists', 'keyName']`
 * Empty operator `['empty', <expression>]`
 * Length operator `['length', <expression>]`, `mb_strlen` for string, `count` for array.
