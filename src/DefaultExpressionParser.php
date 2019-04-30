@@ -11,9 +11,12 @@ use ArekX\ArrayExpression\Exceptions\TypeNotMappedException;
 use \ArekX\ArrayExpression\Interfaces\ExpressionParser as ExpressionParserInterface;
 use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Operators\AndOperator;
+use ArekX\ArrayExpression\Operators\BetweenOperator;
 use ArekX\ArrayExpression\Operators\CompareOperator;
 use ArekX\ArrayExpression\Operators\OrOperator;
 use ArekX\ArrayExpression\Operators\RegexOperator;
+use ArekX\ArrayExpression\Operators\OfOperator;
+use ArekX\ArrayExpression\Operators\ValueOperator;
 use ArekX\ArrayExpression\Operators\XOrOperator;
 
 /**
@@ -31,7 +34,10 @@ class DefaultExpressionParser extends ExpressionParser
             'regex' => RegexOperator::class,
             'and' => AndOperator::class,
             'or' => OrOperator::class,
-            'xor' => XOrOperator::class
+            'xor' => XOrOperator::class,
+            'value' => ValueOperator::class,
+            'get' => OfOperator::class,
+            'between' => BetweenOperator::class
         ]);
     }
 }

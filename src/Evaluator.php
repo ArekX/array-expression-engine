@@ -60,7 +60,7 @@ class Evaluator
      *
      * @param array $expression Expression which will be used
      * @param mixed $value Value which will be used.
-     * @return bool
+     * @return mixed
      * @throws Exceptions\TypeNotMappedException
      * @throws Exceptions\InvalidValueTypeException
      */

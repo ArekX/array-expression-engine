@@ -7,6 +7,8 @@
 
 namespace ArekX\ArrayExpression\Operators;
 
+use ArekX\ArrayExpression\Exceptions\NotAnExpressionException;
+use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Interfaces\ValueParser;
 
 /**
@@ -25,6 +27,8 @@ class CompareOperator extends BaseOperator
     const NE = '<>';
     const IN = 'in';
 
+    protected $name;
+
     /**
      * Operator which will be used for comparison.
      *
@@ -35,49 +39,43 @@ class CompareOperator extends BaseOperator
     /**
      * Value which will be taken from value parser.
      *
-     * @var string
+     * @var Operator
      */
-    public $fromValue;
+    public $operandA;
 
     /**
-     * Default value to be returned if nothing is found.
-     *
-     * @var mixed
+     * @var Operator
      */
-    public $default;
-
-    /**
-     * @var mixed Result which will be used to compare result against.
-     */
-    public $vsResult;
+    public $operandB;
 
     /**
      * @inheritDoc
      */
     public function configure(array $config)
     {
-        $this->default = $config['default'] ?? null;
+        $this->setName($config[0] ?? 'unknown');
 
-        if (count($config) < 2) {
-            throw new \InvalidArgumentException('Name and value must be passed.');
+        if (count($config) < 3) {
+            throw new \InvalidArgumentException("Minimum format must be satisfied: ['{$this->getName()}', <expressionA>, <expressionB>]");
         }
 
-        $applyParams = array_filter([
-            $config[1] ?? null,
-            $config[2] ?? null,
-            $config[3] ?? null,
-        ]);
+        $lastParam = $config[3] ?? null;
 
-        if (count($applyParams) === 1) {
-            $this->vsResult = $applyParams[0];
-        } elseif (count($applyParams) === 2) {
-            $this->fromValue = $applyParams[0];
-            $this->vsResult = $applyParams[1];
-        } elseif(count($applyParams) === 3) {
-            $this->fromValue = $applyParams[0];
-            $this->setOperator($applyParams[1]);
-            $this->vsResult = $applyParams[2];
+        $this->assertIsExpression($config[1]);
+
+        if ($lastParam !== null) {
+            $this->assertIsExpression($lastParam);
+            $this->operandA = $this->parser->parse($config[1]);
+            $this->setOperator($config[2]);
+            $this->operandB = $this->parser->parse($lastParam);
+            return;
         }
+
+        $this->assertIsExpression($config[2]);
+
+        $this->operandA = $this->parser->parse($config[1]);
+        $this->operandB = $this->parser->parse($config[2]);
+        $this->setOperator(self::EQ);
     }
 
     /**
@@ -95,25 +93,26 @@ class CompareOperator extends BaseOperator
      */
     public function evaluate(ValueParser $value)
     {
-        $vsValue = $value->getValue($this->fromValue, $this->default);
+        $resultA = $this->operandA->evaluate($value);
+        $resultB = $this->operandB->evaluate($value);
 
         switch ($this->operator) {
             case self::NE:
-                return $this->vsResult !== $vsValue;
+                return $resultA !== $resultB;
             case self::EQ:
-                return $this->vsResult === $vsValue;
+                return $resultA === $resultB;
             case self::LT:
-                return $vsValue < $this->vsResult;
+                return $resultA < $resultB;
             case self::LTE:
-                return $vsValue <= $this->vsResult;
+                return $resultA <= $resultB;
             case self::GT:
-                return $vsValue > $this->vsResult;
+                return $resultA > $resultB;
             case self::GTE:
-                return $vsValue >= $this->vsResult;
+                return $resultA >= $resultB;
             case self::IN:
-                return in_array($vsValue, $this->vsResult, true);
+                return in_array($resultA, $resultB, true);
         }
 
-        return $this->vsResult === $vsValue;
+        return $resultA === $resultB;
     }
 }

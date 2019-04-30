@@ -24,14 +24,18 @@ abstract class BaseGroupOperator extends BaseOperator
      * @var Operator[]
      */
     protected $operators = [];
+
     /**
      * @inheritDoc
      */
     public function configure(array $config)
     {
+        $this->setName($config[0] ?? 'unknown');
+
         if (count($config) <= 1) {
-            throw new \InvalidArgumentException('Config must have at least one sub operator.');
+            throw new \InvalidArgumentException("Minimum format must be satisfied: ['{$this->getName()}', <expression1>, ..., <expressionN>]");
         }
+
         $this->config = $config;
     }
 }

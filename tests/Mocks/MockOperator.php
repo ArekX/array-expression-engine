@@ -14,6 +14,7 @@ use ArekX\ArrayExpression\Interfaces\ValueParser;
 
 class MockOperator implements Operator
 {
+    public $name;
     public $config;
     public $preConfig;
     public $parser;
@@ -32,6 +33,7 @@ class MockOperator implements Operator
      */
     public function configure(array $config)
     {
+        $this->name = $config[0];
         $this->config = $config;
     }
 
@@ -69,5 +71,15 @@ class MockOperator implements Operator
     public function preconfigure(array $config)
     {
         $this->preConfig = $config;
+    }
+
+    /**
+     * Returns name of the operator.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

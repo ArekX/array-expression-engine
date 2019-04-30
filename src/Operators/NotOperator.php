@@ -26,6 +26,7 @@ class NotOperator extends BaseGroupOperator
     public function evaluate(ValueParser $value)
     {
         if (empty($this->operators[1])) {
+            $this->assertIsExpression($this->config[1]);
             $this->operators[1] = $this->parser->parse($this->config[1]);
         }
 

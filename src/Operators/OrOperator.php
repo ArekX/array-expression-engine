@@ -22,11 +22,13 @@ class OrOperator extends BaseGroupOperator
      *
      * @param ValueParser $value Value to be evaluated
      * @return mixed Evaluation result
+     * @throws \ArekX\ArrayExpression\Exceptions\NotAnExpressionException
      */
     public function evaluate(ValueParser $value)
     {
         for ($i = 1; array_key_exists($i, $this->config); $i++) {
             if (empty($this->operators[$i])) {
+                $this->assertIsExpression($this->config[$i]);
                 $this->operators[$i] = $this->parser->parse($this->config[$i]);
             }
 

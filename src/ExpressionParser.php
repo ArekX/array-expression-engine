@@ -62,8 +62,8 @@ class ExpressionParser implements ExpressionParserInterface
 
         /** @var Operator $resolver */
         $resolver = new $resolver();
-        $resolver->configure($expression);
         $resolver->setParser($this);
+        $resolver->configure($expression);
         return $resolver;
     }
 }

@@ -7,6 +7,8 @@
 
 namespace ArekX\ArrayExpression\Operators;
 
+use ArekX\ArrayExpression\Exceptions\InvalidEvaluationResultType;
+use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Interfaces\ValueParser;
 
 /**
@@ -20,43 +22,34 @@ class RegexOperator extends BaseOperator
     /**
      * Value which will be taken from value parser.
      *
-     * @var string
+     * @var Operator
      */
-    public $fromValue;
+    public $from;
 
     /**
-     * @var string Regex result against which it will be matched.
+     * @var Operator|string Regex result against which it will be matched.
      */
     public $match;
-
-    /**
-     * Default value to be returned if nothing is found.
-     *
-     * @var mixed
-     */
-    public $default;
 
     /**
      * @inheritDoc
      */
     public function configure(array $config)
     {
-        $this->default = $config['default'] ?? '';
+        $this->setName($config[0] ?? 'unknown');
 
-        if (count($config) < 2) {
-            throw new \InvalidArgumentException('Match must be passed.');
+        if (count($config) <= 1) {
+            throw new \InvalidArgumentException("Minimum format must be satisfied: ['{$this->getName()}', <expression>, '/pattern/']");
         }
 
-        $applyParams = array_filter([
-            $config[1] ?? null,
-            $config[2] ?? null,
-        ]);
+        $this->assertIsExpression($config[1]);
 
-        if (count($applyParams) === 1) {
-            $this->match = $applyParams[0];
-        } elseif (count($applyParams) === 2) {
-            $this->fromValue = $applyParams[0];
-            $this->match = $applyParams[1];
+        $this->match = $config[2];
+        $this->from = $this->parser->parse($config[1]);
+
+        if (is_array($this->match)) {
+            $this->assertIsExpression($this->match);
+            $this->match = $this->parser->parse($this->match);
         }
     }
 
@@ -65,6 +58,22 @@ class RegexOperator extends BaseOperator
      */
     public function evaluate(ValueParser $value)
     {
-        return (bool)preg_match($this->match, $value->getValue($this->fromValue, $this->default));
+        $result = $this->from->evaluate($value);
+
+        if (!is_string($result)) {
+            throw new InvalidEvaluationResultType($result, 'string');
+        }
+
+        if (is_string($this->match)) {
+            return (bool)preg_match($this->match, $result);
+        }
+
+        $matchResult = $this->match->evaluate($value);
+
+        if (!is_string($matchResult)) {
+            throw new InvalidEvaluationResultType($result, 'string');
+        }
+
+        return (bool)preg_match($matchResult, $result);
     }
 }

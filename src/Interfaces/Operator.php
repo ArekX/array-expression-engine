@@ -28,6 +28,13 @@ interface Operator
     public function configure(array $config);
 
     /**
+     * Returns name of the operator.
+     *
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
      * Sets operator parser which will be used to parse arrays and return more operator instances.
      *
      * @param ExpressionParser $parser Parser which will be set.
