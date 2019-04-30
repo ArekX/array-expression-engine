@@ -283,7 +283,7 @@ After creating this class we need to add it to the evaluator's expression parser
 $evaluator = \ArekX\ArrayExpression\Evaluator::create();
 $evaluator->getExpressionParser()->setType('dog', DogOperator::class);
 
-$test = ['cat', ['get', 'sentence']];
+$test = ['dog', ['get', 'sentence']];
 
 $result = $evaluator->run($test, ['sentence' => 'Hello this is cat.']); // Returns: Hello this is dog.
 ```
