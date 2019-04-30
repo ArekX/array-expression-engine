@@ -13,12 +13,12 @@ use ArekX\ArrayExpression\Interfaces\ExpressionParser;
 use ArekX\ArrayExpression\Interfaces\ValueParser;
 
 /**
- * Class OfOperator
+ * Class GetOperator
  * Operator for returning static values from value parser
  *
  * @package ArekX\ArrayExpression\Operators
  */
-class OfOperator extends BaseOperator
+class GetOperator extends BaseOperator
 {
     /**
      * Name of the key from which value will be returned.
@@ -47,11 +47,7 @@ class OfOperator extends BaseOperator
     {
         $this->setName($config[0] ?? 'unknown');
 
-        if (count($config) <= 1) {
-            throw new \InvalidArgumentException("Minimum format must be satisfied: ['{$this->getName()}', 'keyFromValue']");
-        }
-
-        $this->name = $config[1] ?? null;
+        $this->name = $config[1] ?? '';
         $this->default = $config['default'] ?? null;
     }
 

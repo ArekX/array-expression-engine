@@ -15,7 +15,7 @@ use ArekX\ArrayExpression\Operators\BetweenOperator;
 use ArekX\ArrayExpression\Operators\CompareOperator;
 use ArekX\ArrayExpression\Operators\OrOperator;
 use ArekX\ArrayExpression\Operators\RegexOperator;
-use ArekX\ArrayExpression\Operators\OfOperator;
+use ArekX\ArrayExpression\Operators\GetOperator;
 use ArekX\ArrayExpression\Operators\ValueOperator;
 use ArekX\ArrayExpression\Operators\XOrOperator;
 
@@ -36,7 +36,7 @@ class DefaultExpressionParser extends ExpressionParser
             'or' => OrOperator::class,
             'xor' => XOrOperator::class,
             'value' => ValueOperator::class,
-            'get' => OfOperator::class,
+            'get' => GetOperator::class,
             'between' => BetweenOperator::class
         ]);
     }
