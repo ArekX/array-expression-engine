@@ -1,6 +1,6 @@
 # Array Expression Engine
 
-[![Build Status](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/?branch=master)
 
 This is an array expression parser which can be used to parse values using
 configuration specified in PHP arrays. These arrays can be loaded from anywhere,

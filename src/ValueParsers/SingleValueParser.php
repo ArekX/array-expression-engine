@@ -22,7 +22,7 @@ class SingleValueParser extends BaseValueParser
      * This parser ignores $requestedName and $default and always returns RAW value.
      *
      * @param string $requestedName (Ignored) Requested name to return value
-     * @param null $default (Ignored) Default value to be returned if value is not found by requested name.
+     * @param mixed $default (Ignored) Default value to be returned if value is not found by requested name.
      * @return mixed
      */
     public function getValue($requestedName = '', $default = null)
