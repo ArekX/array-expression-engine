@@ -30,9 +30,9 @@ abstract class BaseOperator implements Operator
     /**
      * Parser used for expression parsing.
      *
-     * @var null|ExpressionParser
+     * @var ExpressionParser
      */
-    protected $parser = null;
+    protected $parser;
 
     /**
      * @inheritDoc

@@ -33,7 +33,7 @@ interface ValueParser
      * Returns parsed value
      *
      * @param string $requestedName Requested name which will be resolved by value parser.
-     * @param null $default Default value if requested name in value is not found.
+     * @param mixed $default Default value if requested name in value is not found.
      * @return mixed
      */
     public function getValue($requestedName = '', $default = null);

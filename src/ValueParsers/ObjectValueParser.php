@@ -23,7 +23,7 @@ class ObjectValueParser extends BaseValueParser
     /**
      * Sets raw array value to be parsed.
      *
-     * @param array $rawValue Array value to be parsed
+     * @param mixed $rawValue Array value to be parsed
      * @throws InvalidValueTypeException Error which is thrown if raw value is not an array.
      */
     public function setRaw($rawValue)
@@ -43,7 +43,7 @@ class ObjectValueParser extends BaseValueParser
      * If a $requestedName is a string in dot notation then object will be traversed to find value from those keys.
      *
      * @param string $requestedName Requested key to be returned
-     * @param null $default Default value to be returned if nothing is found.
+     * @param mixed $default Default value to be returned if nothing is found.
      * @return mixed
      */
     public function getValue($requestedName = '', $default = null)
