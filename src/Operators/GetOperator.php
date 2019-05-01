@@ -25,7 +25,7 @@ class GetOperator extends BaseOperator
      *
      * @var string
      */
-    public $name;
+    public $key;
 
     /**
      * Default value to be returned if that key was not found.
@@ -47,7 +47,11 @@ class GetOperator extends BaseOperator
     {
         $this->setName($config[0] ?? 'unknown');
 
-        $this->name = $config[1] ?? '';
+        if (count($config) < 1) {
+            throw new \InvalidArgumentException("Minimum format must be satisfied: ['{$this->getName()}']");
+        }
+
+        $this->key = $config[1] ?? '';
         $this->default = $config['default'] ?? null;
     }
 
@@ -59,7 +63,7 @@ class GetOperator extends BaseOperator
      */
     public function evaluate(ValueParser $value)
     {
-        return $value->getValue($this->name, $this->default);
+        return $value->getValue($this->key, $this->default);
     }
 
 }

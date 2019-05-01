@@ -8,8 +8,10 @@
 namespace tests\Operators;
 
 
+use ArekX\ArrayExpression\Exceptions\InvalidEvaluationResultType;
 use ArekX\ArrayExpression\ExpressionParser;
 use ArekX\ArrayExpression\Operators\GetOperator;
+use ArekX\ArrayExpression\Operators\ValueOperator;
 use ArekX\ArrayExpression\ValueParsers\ArrayValueParser;
 use ArekX\ArrayExpression\ValueParsers\SingleValueParser;
 use tests\Mocks\MockOperator;
@@ -17,7 +19,7 @@ use tests\Spies\RegexOperatorSpy;
 use tests\TestCase;
 
 /**
- * Class OrOperatorTest
+ * Class RegexOperatorTest
  * @package tests\Operators
  *
  */
@@ -55,6 +57,29 @@ class RegexOperatorTest extends TestCase
         $this->assertFalse($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
+    public function testChecksAgainstExpressionPattern()
+    {
+        $i = $this->createInstance();
+        $i->configure(['regex', ['get', 'name'], ['value', '/^a+$/']]);
+        $this->assertFalse($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
+    }
+
+    public function testThrowErrorIfNameIsNotString()
+    {
+        $i = $this->createInstance();
+        $this->expectException(InvalidEvaluationResultType::class);
+        $i->configure(['regex', ['value', false], '/^a+$/']);
+        $this->assertFalse($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
+    }
+
+    public function testThrowErrorIfPatternIsNotString()
+    {
+        $i = $this->createInstance();
+        $this->expectException(InvalidEvaluationResultType::class);
+        $i->configure(['regex', ['value', 'test'], ['value', false]]);
+        $this->assertFalse($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
+    }
+
 
     public function testUseDefaultValue()
     {
@@ -68,6 +93,7 @@ class RegexOperatorTest extends TestCase
         $parser = new ExpressionParser();
         $parser->setType('mock', MockOperator::class);
         $parser->setType('get', GetOperator::class);
+        $parser->setType('value', ValueOperator::class);
         $operator = new RegexOperatorSpy();
         $operator->setParser($parser);
 

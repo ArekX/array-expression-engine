@@ -18,7 +18,7 @@ use tests\Spies\CompareOperatorSpy;
 use tests\TestCase;
 
 /**
- * Class OrOperatorTest
+ * Class CompareOperatorTest
  * @package tests\Operators
  *
  */

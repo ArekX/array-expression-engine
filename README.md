@@ -1,5 +1,7 @@
 # Array Expression Engine
 
+[![Build Status](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ArekX/array-expression-engine/?branch=master)
+
 This is an array expression parser which can be used to parse values using
 configuration specified in PHP arrays. These arrays can be loaded from anywhere,
 like from JSON string, PHP files, etc.
@@ -291,9 +293,3 @@ $result = $evaluator->run($test, ['sentence' => 'Hello this is cat.']); // Retur
 ## Tests
 
 Run `composer test` to run tests.
-
-## Test Coverage
-
-Ideally, goal test coverage is 100%, to check the test coverage run `composer coverage`
-
-Current coverage: 100%

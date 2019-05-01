@@ -19,16 +19,22 @@ use ArekX\ArrayExpression\Interfaces\ValueParser;
 class BetweenOperator extends BaseOperator
 {
     /**
+     * Operator result which will be checked.
+     *
      * @var Operator
      */
     public $operandA;
 
     /**
+     * Operator result which will be used for minimum.
+     *
      * @var Operator
      */
     public $operandB;
 
     /**
+     * Operator result which will be used for maximum.
+     *
      * @var Operator
      */
     public $operandC;
@@ -41,7 +47,7 @@ class BetweenOperator extends BaseOperator
         $this->setName($config[0] ?? 'unknown');
 
         if (count($config) < 4) {
-            throw new \InvalidArgumentException("No matching minimum format: ['' expression operator");
+            throw new \InvalidArgumentException("No matching minimum format: ['{$this->getName()}', <valueExpression>, <minExpression>, <maxExpression>");
         }
 
         $this->assertIsExpression($config[1]);
