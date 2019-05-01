@@ -68,7 +68,7 @@ AND operation between two or more expressions, those expressions can by any othe
 
 Example:
 ```php
-$nameMustBeTestAndAgeAbove2 = ['and', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]];
+$nameMustBeTestAndAgeAbove2 = ['and', ['compare', ['get', 'name'], ['value', 'test']], ['compare', ['get', 'age'], '>', ['value', 2]]];
 
 $evaluator = \ArekX\ArrayExpression\Evaluator::create();
 
@@ -82,7 +82,7 @@ OR operation between two or more expressions, those expressions can by any other
 
 Example:
 ```php
-$nameMustBeTestOrAgeAbove2 = ['or', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]];
+$nameMustBeTestOrAgeAbove2 = ['or', ['compare', ['get', 'name'], ['value', 'test']], ['compare', ['get', 'age'], '>', ['value', 2]]];
 
 $evaluator = \ArekX\ArrayExpression\Evaluator::create();
 
@@ -96,7 +96,7 @@ XOR operation between two or more expressions, those expressions can by any othe
 
 Example:
 ```php
-$nameMustBeTestXOrAgeAbove2 = ['xor', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]];
+$nameMustBeTestXOrAgeAbove2 = ['xor', ['compare', ['get', 'name'], ['value', 'test']], ['compare', ['get', 'age'], '>', ['value', 2]]];
 
 $evaluator = \ArekX\ArrayExpression\Evaluator::create();
 
@@ -111,7 +111,7 @@ NOT operation or the inversion of the expression passed to it.
 
 Example:
 ```php
-$expression = ['not', ['or', ['compare', 'name', 'test'], ['compare', 'age', '>', 2]]];
+$expression = ['not', ['or', ['compare', ['get', 'name'], ['value', 'test']], ['compare', ['get', 'age'], '>', ['value', 2]]]];
 
 $evaluator = \ArekX\ArrayExpression\Evaluator::create();
 
