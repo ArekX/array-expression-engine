@@ -23,6 +23,13 @@ trait OperatorTestTrait
         $this->assertEquals(['group', ['mock']], $operator->getConfig());
     }
 
+    public function testValidGetName()
+    {
+        $i = $this->createInstance();
+        $i->configure(['group', ['get', 'name'], ['value', 'value']]);
+        $this->assertEquals('group', $i->getName());
+    }
+
     public function testConfigMustHaveAtLeastOneSubExpression()
     {
         $operator = $this->createInstance();

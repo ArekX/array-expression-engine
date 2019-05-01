@@ -8,9 +8,11 @@
 namespace tests\Operators;
 
 
+use ArekX\ArrayExpression\Exceptions\NotAnExpressionException;
 use ArekX\ArrayExpression\ExpressionParser;
+use ArekX\ArrayExpression\Operators\GetOperator;
+use ArekX\ArrayExpression\Operators\ValueOperator;
 use ArekX\ArrayExpression\ValueParsers\ArrayValueParser;
-use ArekX\ArrayExpression\ValueParsers\SingleValueParser;
 use tests\Mocks\MockOperator;
 use tests\Spies\CompareOperatorSpy;
 use tests\TestCase;
@@ -30,14 +32,28 @@ class CompareOperatorTest extends TestCase
         $this->assertSame($parser, $i->getParser());
     }
 
-    public function testNameIsTakenFromValue()
+    public function testValidGetName()
     {
         $i = $this->createInstance();
-        $i->configure(['compare', 'name', 'value']);
+        $i->configure(['compare', ['get', 'name'], ['value', 'value']]);
+        $this->assertEquals('compare', $i->getName());
+    }
+
+    public function testEquationCompare()
+    {
+        $i = $this->createInstance();
+        $i->configure(['compare', ['get', 'name'], ['value', 'value']]);
         $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
-    public function testErrorIfTheConfigIsNotComplete()
+    public function testSettingInvalidOperatorsDefersToEqOperator()
+    {
+        $i = $this->createInstance();
+        $i->configure(['compare', ['get', 'name'], '!!!', ['value', 'value']]);
+        $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
+    }
+
+    public function testInvalidArgumentExceptionOnInvalidConfig()
     {
         $i = $this->createInstance();
         $this->expectException(\InvalidArgumentException::class);
@@ -45,34 +61,36 @@ class CompareOperatorTest extends TestCase
         $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
-    public function testSingleValueCompare()
+    public function testNotValidExpressionInFirstParam()
     {
         $i = $this->createInstance();
-        $i->configure(['compare', 'value']);
-        $this->assertTrue($i->evaluate(SingleValueParser::from("value")));
+        $this->expectException(NotAnExpressionException::class);
+        $i->configure(['compare', 'test', ['get']]);
+        $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
-
-    public function test4ValuesSetAnOperator()
+    public function testNotValidExpressionInFirstParamFullStyle()
     {
         $i = $this->createInstance();
-        $i->configure(['compare', 'name', '<>', 'value']);
-        $this->assertFalse($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
-    }
-
-
-    public function testSettingInvalidOperatorsDefersToEqOperator()
-    {
-        $i = $this->createInstance();
-        $i->configure(['compare', 'name', '!!!', 'value']);
+        $this->expectException(NotAnExpressionException::class);
+        $i->configure(['compare', 'test', '=', ['get']]);
         $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
 
-    public function testUseDefaultValue()
+    public function testNotValidExpressionInSecondParam()
     {
         $i = $this->createInstance();
-        $i->configure(['compare', 'unknownKey', 'value', 'default' => 'value']);
+        $this->expectException(NotAnExpressionException::class);
+        $i->configure(['compare', ['get'], 'test']);
+        $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
+    }
+
+    public function testNotValidExpressionInSecondParamFullStyle()
+    {
+        $i = $this->createInstance();
+        $this->expectException(NotAnExpressionException::class);
+        $i->configure(['compare', ['get'], '=', 'test']);
         $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
@@ -82,20 +100,20 @@ class CompareOperatorTest extends TestCase
         $value = ArrayValueParser::from(['name' => 'value', 'number' => 5]);
 
         $maps = [
-            [['compare', 'name', '<>', 'value'], false],
-            [['compare', 'name', '<>', 'value1'], true],
-            [['compare', 'name', '=', 'value'], true],
-            [['compare', 'name', '=', 'value1'], false],
-            [['compare', 'number', '>', 5], false],
-            [['compare', 'number', '>', 4], true],
-            [['compare', 'number', '>=', 5], true],
-            [['compare', 'number', '>=', 6], false],
-            [['compare', 'number', '<', 6], true],
-            [['compare', 'number', '<', 4], false],
-            [['compare', 'number', '<=', 5], true],
-            [['compare', 'number', '<=', 4], false],
-            [['compare', 'number', 'in', [4,5,6]], true],
-            [['compare', 'number', 'in', [1,2]], false],
+            [['compare', ['get', 'name'], '<>', ['value', 'value']], false],
+            [['compare', ['get', 'name'], '<>', ['value', 'value1']], true],
+            [['compare', ['get', 'name'], '=', ['value', 'value']], true],
+            [['compare', ['get', 'name'], '=', ['value', 'value1']], false],
+            [['compare', ['get', 'number'], '>', ['value', 5]], false],
+            [['compare', ['get', 'number'], '>', ['value', 4]], true],
+            [['compare', ['get', 'number'], '>=', ['value', 5]], true],
+            [['compare', ['get', 'number'], '>=', ['value', 6]], false],
+            [['compare', ['get', 'number'], '<', ['value', 6]], true],
+            [['compare', ['get', 'number'], '<', ['value', 4]], false],
+            [['compare', ['get', 'number'], '<=', ['value', 5]], true],
+            [['compare', ['get', 'number'], '<=', ['value', 4]], false],
+            [['compare', ['get', 'number'], 'in', ['value', [4,5,6]]], true],
+            [['compare', ['get', 'number'], 'in', ['value', [1,2]]], false],
         ];
 
         foreach ($maps as $map) {
@@ -108,6 +126,8 @@ class CompareOperatorTest extends TestCase
     {
         $parser = new ExpressionParser();
         $parser->setType('mock', MockOperator::class);
+        $parser->setType('get', GetOperator::class);
+        $parser->setType('value', ValueOperator::class);
         $operator = new CompareOperatorSpy();
         $operator->setParser($parser);
 

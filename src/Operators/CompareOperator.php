@@ -7,7 +7,6 @@
 
 namespace ArekX\ArrayExpression\Operators;
 
-use ArekX\ArrayExpression\Exceptions\NotAnExpressionException;
 use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Interfaces\ValueParser;
 
@@ -26,8 +25,6 @@ class CompareOperator extends BaseOperator
     const GTE = '>=';
     const NE = '<>';
     const IN = 'in';
-
-    protected $name;
 
     /**
      * Operator which will be used for comparison.

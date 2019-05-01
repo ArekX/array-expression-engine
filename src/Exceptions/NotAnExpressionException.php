@@ -14,6 +14,6 @@ class NotAnExpressionException extends \Exception
     public function __construct($value)
     {
         $this->value = $value;
-        parent::__construct("Value must be a valid expression got: " . print_r($value), 0, null);
+        parent::__construct("Value must be a valid expression got: " . print_r($value, true), 0, null);
     }
 }

@@ -25,6 +25,8 @@ class AndOperatorTest extends TestCase
 
     protected $operator = AndOperatorSpy::class;
 
+
+
     public function testAndOperatorExitsOnFirstFalseValue()
     {
         $operator = $this->createInstance();

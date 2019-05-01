@@ -9,10 +9,10 @@ namespace tests\Operators;
 
 
 use ArekX\ArrayExpression\ExpressionParser;
+use ArekX\ArrayExpression\Operators\GetOperator;
 use ArekX\ArrayExpression\ValueParsers\ArrayValueParser;
 use ArekX\ArrayExpression\ValueParsers\SingleValueParser;
 use tests\Mocks\MockOperator;
-use tests\Spies\CompareOperatorSpy;
 use tests\Spies\RegexOperatorSpy;
 use tests\TestCase;
 
@@ -43,7 +43,7 @@ class RegexOperatorTest extends TestCase
     public function testMatchesSingleValue()
     {
         $i = $this->createInstance();
-        $i->configure(['regex', '/a+/']);
+        $i->configure(['regex', ['get'], '/a+/']);
         $this->assertTrue($i->evaluate(SingleValueParser::from("aaaaaaa")));
     }
 
@@ -51,7 +51,7 @@ class RegexOperatorTest extends TestCase
     public function testChecksByByName()
     {
         $i = $this->createInstance();
-        $i->configure(['regex', 'name', '/^a+$/']);
+        $i->configure(['regex', ['get', 'name'], '/^a+$/']);
         $this->assertFalse($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
@@ -59,7 +59,7 @@ class RegexOperatorTest extends TestCase
     public function testUseDefaultValue()
     {
         $i = $this->createInstance();
-        $i->configure(['regex', 'unknownKey', '/value/', 'default' => 'value']);
+        $i->configure(['regex', ['get', 'name'], '/value/']);
         $this->assertTrue($i->evaluate(ArrayValueParser::from(['name' => 'value'])));
     }
 
@@ -67,6 +67,7 @@ class RegexOperatorTest extends TestCase
     {
         $parser = new ExpressionParser();
         $parser->setType('mock', MockOperator::class);
+        $parser->setType('get', GetOperator::class);
         $operator = new RegexOperatorSpy();
         $operator->setParser($parser);
 

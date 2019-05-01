@@ -29,7 +29,7 @@ class EvaluateTest extends TestCase
     {
         $i = $this->createInstance();
         $result = $i->run(
-            ['compare', 'test'],
+            ['compare', ['get'], ['value', 'test']],
             "test"
         );
         $this->assertTrue($result);
@@ -45,11 +45,11 @@ class EvaluateTest extends TestCase
         $result = $i->run(
             [
                 'and',
-                ['compare', 'name', 'value'],
+                ['compare', ['get', 'name'], ['value', 'value']],
                 [
                     'or',
-                    ['compare', 'name2', 'valueA'],
-                    ['compare', 'name2', 'valueB'],
+                    ['compare', ['get', 'name2'], ['value', 'valueA']],
+                    ['compare', ['get', 'name2'], ['value', 'valueB']],
                 ],
 
             ],
@@ -68,11 +68,11 @@ class EvaluateTest extends TestCase
         $result = $i->run(
             [
                 'and',
-                ['compare', 'name', 'value'],
+                ['compare', ['get', 'name'], ['value', 'value']],
                 [
                     'or',
-                    ['compare', 'name2', 'valueA'],
-                    ['compare', 'name2', 'valueB'],
+                    ['compare', ['get', 'name2'], ['value', 'valueA']],
+                    ['compare', ['get', 'name2'], ['value', 'valueB']],
                 ],
 
             ],
