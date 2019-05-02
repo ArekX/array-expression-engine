@@ -60,6 +60,7 @@ COMPARE | Comparison operator |`['compare', <expressionA>, <expressionB>]`, `['c
 REGEX | Regex operator | `['regex', <expression>, '/pattern/']`, `['regex', <expression>, <patternExpression>]`
 VALUE | Value operator, returns static values | `['value', 'this is a static value']`
 GET | GET operator, returns values by name from passed value | `['get', 'keyFromValue']`
+CONCAT | CONCAT operator, concatenates strings | `['concat', <expression1>, ..., <expressionN>]`
 
 ##### AND Operator
 
@@ -226,6 +227,20 @@ $expression = ['get', 'name'];
 $evaluator = \ArekX\ArrayExpression\Evaluator::create();
  
 $evaluator->run($expression, ['name' => 'John']); // returns 'John'
+```
+
+##### Concat Operator
+
+Concat operator is defined in `ArekX\ArrayExpression\Operators\ConcatOperator` class and is used to concatenate two or more strings.
+It requires evaluation results to be strings.
+
+Example:
+ ```php
+$expression = ['concat', ['get', 'first'], ['value', ' '], ['get', 'last']];
+ 
+$evaluator = \ArekX\ArrayExpression\Evaluator::create();
+ 
+$evaluator->run($expression, ['first' => 'John', 'last' => 'Snow']); // returns 'John Snow'
 ```
 
 #### Custom operators

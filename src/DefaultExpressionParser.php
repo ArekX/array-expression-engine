@@ -13,6 +13,7 @@ use ArekX\ArrayExpression\Interfaces\Operator;
 use ArekX\ArrayExpression\Operators\AndOperator;
 use ArekX\ArrayExpression\Operators\BetweenOperator;
 use ArekX\ArrayExpression\Operators\CompareOperator;
+use ArekX\ArrayExpression\Operators\ConcatOperator;
 use ArekX\ArrayExpression\Operators\OrOperator;
 use ArekX\ArrayExpression\Operators\RegexOperator;
 use ArekX\ArrayExpression\Operators\GetOperator;
@@ -37,7 +38,8 @@ class DefaultExpressionParser extends ExpressionParser
             'xor' => XOrOperator::class,
             'value' => ValueOperator::class,
             'get' => GetOperator::class,
-            'between' => BetweenOperator::class
+            'between' => BetweenOperator::class,
+            'concat' => ConcatOperator::class
         ]);
     }
 }
