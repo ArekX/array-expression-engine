@@ -13,7 +13,7 @@
     * We will need `ValueParser::getSubParser($requestedName, $default = null)` which returns subparsed value which will be scoped to requested name. Value parser to determine which parser?
 * All must be `['allMustBe', <valueExpression>, <expressionReturningAnArray>, <checkExpression>]` -> all must be equal to valueExpression to return true
 * One must be `['oneMustBe', <valueExpression>, <expressionReturningAnArray>, <checkExpression>]` -> one must be equal to valueExpression to return true 
-* String concat operator `['concat', ['value', 'hello'], ['value', ' '], ['value', 'world']]` -> `hello world`, Or concat arrays.
+* ~~String concat operator `['concat', ['value', 'hello'], ['value', ' '], ['value', 'world']]` -> `hello world`, Or concat arrays.~~
 * Math operator `['math', ['value', 5], '+', ['math', ['value', 4], '*', ['value', 3]]]` -> 5 + (4 * 3)
 * Some additional Array operators? (must not contain values, array diff, intersection, to_keys, to_values, etc?)
 * Get with no parameters `['get']` equals to `['get', '']` which means whole result.
