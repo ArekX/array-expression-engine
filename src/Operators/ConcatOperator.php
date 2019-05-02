@@ -47,7 +47,8 @@ class ConcatOperator extends BaseOperator
 
         $this->concatOperators = [];
 
-        for ($i = 1; $i < count($config); $i++) {
+        $maxCount = count($config);
+        for ($i = 1; $i < $maxCount; $i++) {
             $this->assertIsExpression($config[$i]);
             $this->concatOperators[] = $this->parser->parse($config[$i]);
         }
