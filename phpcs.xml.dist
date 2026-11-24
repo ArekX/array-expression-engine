@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<ruleset name="array-expression-engine">
+    <description>Coding standard for array-expression-engine.</description>
+    <file>src</file>
+    <rule ref="PSR2"/>
+</ruleset>
