@@ -3,3 +3,5 @@ vendor
 coverage
 untested
 coverage.xml.phpunit.result.cache
+coverage.xml
+coverage/
