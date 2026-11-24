@@ -2,4 +2,4 @@ vendor
 .idea
 coverage
 untested
-coverage.xml
+coverage.xml.phpunit.result.cache
